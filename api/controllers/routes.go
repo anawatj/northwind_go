@@ -27,4 +27,7 @@ func (s *Server) initializeRoutes() {
 	//District routes
 	s.Router.HandleFunc("/api/v1/regions/{rid}/provinces/{pid}/districts",middlewares.SetMiddlewareJSON(s.GetDistricts)).Methods("GET")
 
+	//SubDistrict routes
+	s.Router.HandleFunc("/api/v1/regions/{rid}/provinces/{pid}/districts/{did}/subDistricts",middlewares.SetMiddlewareJSON(s.GetSubDistricts)).Methods("GET")
+
 }
