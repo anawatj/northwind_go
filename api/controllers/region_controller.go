@@ -39,3 +39,15 @@ func (server *Server) CreateRegion(w http.ResponseWriter, r *http.Request) {
 	responses.JSON(w, http.StatusCreated, regionCreated)
 }
 
+func (server *Server) GetRegions(w http.ResponseWriter, r *http.Request) {
+
+	region := models.Region{}
+
+	regions, err := region.FindAllRegions(server.DB)
+	if err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err)
+		return
+	}
+	responses.JSON(w, http.StatusOK, regions)
+}
+

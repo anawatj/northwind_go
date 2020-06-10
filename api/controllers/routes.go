@@ -19,4 +19,5 @@ func (s *Server) initializeRoutes() {
 
 	//Region routes
 	s.Router.HandleFunc("/api/v1/regions",middlewares.SetMiddlewareJSON(s.CreateRegion)).Methods("POST")
+	s.Router.HandleFunc("/api/v1/regions",middlewares.SetMiddlewareJSON(s.GetRegions)).Methods("GET")
 }

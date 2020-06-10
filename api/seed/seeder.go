@@ -24,6 +24,21 @@ var users = []models.User{
 		Password:"P@ssw0rd",
 	},
 }
+var regions =[]models.Region{
+	models.Region{
+		Name:"North",
+	},
+	models.Region{
+		Name:"Middle",
+	},
+	models.Region{
+		Name:"NorthEast",
+	},
+	models.Region{
+		Name:"South",
+	},
+
+}
 
 
 
@@ -48,5 +63,11 @@ func Load(db *gorm.DB) {
 	
 
 	
+	}
+	for i, _ := range regions{
+		err = db.Debug().Model(&models.Region{}).Create(&regions[i]).Error
+		if err != nil {
+			log.Fatalf("cannot seed regions table: %v",err)
+		}
 	}
 }
