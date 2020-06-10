@@ -1,5 +1,7 @@
 package models
-
+import (
+	"github.com/jinzhu/gorm"
+)
 
 type Province struct {
 	ID uint32 `gorm:"primary_key;auto_increment" json:"id"`
@@ -7,3 +9,12 @@ type Province struct {
 	RegionID uint32 `gorm:"not null" json:"regionId"`
 }
 
+func (u *Province) FindAllProvince(db *gorm.DB,rid uint32) (*[]Province, error) {
+	var err error
+	provinces := []Province{}
+	err = db.Debug().Model(&Region{}).Where("region_id = ?", rid).Find(&provinces).Error
+	if err != nil {
+		return &[]Province{}, err
+	}
+	return &provinces, err
+}
