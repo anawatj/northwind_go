@@ -12,7 +12,7 @@ type Province struct {
 func (u *Province) FindAllProvince(db *gorm.DB,rid uint32) (*[]Province, error) {
 	var err error
 	provinces := []Province{}
-	err = db.Debug().Model(&Region{}).Where("region_id = ?", rid).Find(&provinces).Error
+	err = db.Debug().Model(&Province{}).Where("region_id = ?", rid).Find(&provinces).Error
 	if err != nil {
 		return &[]Province{}, err
 	}

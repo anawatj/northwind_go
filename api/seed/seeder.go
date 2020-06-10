@@ -349,16 +349,58 @@ var provinces = []models.Province{
 		Name:"Satoon",
 	},
 }
+var districts = []models.District{
+	models.District{
+		Name:"Pranakorn",
+		ProvinceID:1,
+	},
+	models.District{
+		Name:"Promparb",
+		ProvinceID:1,
+	},
+	models.District{
+		Name:"Sampantawong",
+		ProvinceID:1,
+	},
+	models.District{
+		Name:"Bangrak",
+		ProvinceID:1,
+	},
+	models.District{
+		Name:"Dusit",
+		ProvinceID:1,
+	},
+	models.District{
+		Name:"Bangyai",
+		ProvinceID:2,
+	},
+	models.District{
+		Name:"Chiangdao",
+		ProvinceID:27,
+	},
+	models.District{
+		Name:"Fang",
+		ProvinceID:27,
+	},
+	models.District{
+		Name:"Sawee",
+		ProvinceID:64,
+	},
+	models.District{
+		Name:"Buayai",
+		ProvinceID:44,
+	},
+}
 
 
 
 func Load(db *gorm.DB) {
 
-	err := db.Debug().DropTableIfExists( &models.User{},&models.Region{},&models.Province{}).Error
+	err := db.Debug().DropTableIfExists( &models.User{},&models.Region{},&models.Province{},&models.District{}).Error
 	if err != nil {
 		log.Fatalf("cannot drop table: %v", err)
 	}
-	err = db.Debug().AutoMigrate(&models.User{},&models.Region{},&models.Province{}).Error
+	err = db.Debug().AutoMigrate(&models.User{},&models.Region{},&models.Province{},&models.District{}).Error
 	if err != nil {
 		log.Fatalf("cannot migrate table: %v", err)
 	}
@@ -384,6 +426,12 @@ func Load(db *gorm.DB) {
 		err = db.Debug().Model(&models.Province{}).Create(&provinces[i]).Error
 		if err != nil {
 			log.Fatalf("cannot seed province table: %v",err)
+		}
+	}
+	for i, _ := range districts{
+		err = db.Debug().Model(&models.District{}).Create(&districts[i]).Error
+		if err != nil{
+			log.Fatalf("cannot seed district table: %v",err)
 		}
 	}
 }
